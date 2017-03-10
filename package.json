@@ -1,0 +1,27 @@
+{
+  "name": "chapter-8-starter",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnishina/chapter-8-starter.git"
+  },
+  "scripts": {
+    "pree2e": "webdriver-manager update --standalone false --gecko false",
+    "e2e": "protractor",
+    "tsc": "tsc"
+  },
+  "private": true,
+  "dependencies": {
+    "jasmine-spec-reporter": "^3.2.0",
+    "protractor": "^5.1.1",
+    "ts-node": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.5.43",
+    "@types/jasminewd2": "^2.0.1",
+    "@types/selenium-webdriver": "^3.0.0",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1"
+  }
+}
