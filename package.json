@@ -7,9 +7,10 @@
     "url": "git+https://github.com/cnishina/chapter-8-starter.git"
   },
   "scripts": {
-    "pree2e": "webdriver-manager update --standalone false --gecko false",
+    "wd": "webdriver-manager",
     "e2e": "protractor",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "bp": "protractor test-8-2.conf.js --highlightDelay 3000 --webDriverLogDir logs"
   },
   "private": true,
   "dependencies": {
