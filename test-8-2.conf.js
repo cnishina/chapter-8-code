@@ -2,10 +2,13 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 exports.config = {
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome',
+    chromeOptions: {
+      args: ['--no-sandbox']
+    }
   },
   directConnect: true,
-  baseUrl: 'http://127.0.0.1:4200/',
+  baseUrl: 'https://contacts-app-starter.firebaseapp.com/',
   
   framework: 'jasmine',
   specs: [
@@ -15,5 +18,6 @@ exports.config = {
     require('ts-node').register({
       project: 'e2e'
     });
-  }
+  },
+  useAllAngular2AppRoots: true
 };
