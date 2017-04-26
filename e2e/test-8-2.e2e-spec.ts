@@ -8,7 +8,7 @@ describe('interact with elements', () => {
 
     it('should find the add contact button', () => {
       element(by.id('add-contact')).click();
-      expect(browser.getCurrentUrl()).toEqual('https://contacts-app-starter.firebaseapp.com/add');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
 
     it('should write a name', () => {
@@ -18,7 +18,7 @@ describe('interact with elements', () => {
 
     it('should click the create button', () => {
       element(by.css('.create-button')).click();
-      expect(browser.getCurrentUrl()).toEqual('https://contacts-app-starter.firebaseapp.com/');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl);
     });
   });
 
@@ -55,7 +55,7 @@ describe('interact with elements', () => {
       browser.wait(EC.alertIsPresent(), 5000);
       browser.sleep(1000);
       browser.switchTo().alert().accept();
-      expect(browser.getCurrentUrl()).toEqual('https://contacts-app-starter.firebaseapp.com/add');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
 
     it('should also send an invalid email', () => {
@@ -65,10 +65,10 @@ describe('interact with elements', () => {
         .then(() => {
           browser.sleep(1000);
           browser.switchTo().alert().accept();
-          expect(browser.getCurrentUrl()).toEqual('https://contacts-app-starter.firebaseapp.com/add');
+          expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
         })
         .catch(err => {
-          fail('@baduser.com is an invalid email address. file a bug!')
+          console.error('Error: @baduser.com is an invalid email address. File a bug!');
         });
     });
   });
@@ -86,7 +86,7 @@ describe('interact with elements', () => {
       browser.wait(EC.alertIsPresent(), 5000);
       browser.sleep(1000);
       browser.switchTo().alert().accept();
-      expect(browser.getCurrentUrl()).toEqual('https://contacts-app-starter.firebaseapp.com/add');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
 
     it('should also send an invalid tel', () => {
@@ -96,7 +96,7 @@ describe('interact with elements', () => {
       browser.wait(EC.alertIsPresent(), 5000);
       browser.sleep(1000);
       browser.switchTo().alert().accept();
-      expect(browser.getCurrentUrl()).toEqual('https://contacts-app-starter.firebaseapp.com/add');
+      expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
   });
 });
