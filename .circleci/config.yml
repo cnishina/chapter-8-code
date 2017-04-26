@@ -18,3 +18,4 @@ jobs:
       # TESTS!
       - run: xvfb-run -a npm run e2e test-8-1.conf.js
       - run: xvfb-run -a npm run e2e test-8-2.conf.js
+      - run: xvfb-run -a npm run e2e test-8-3.conf.js

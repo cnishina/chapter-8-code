@@ -1,6 +1,8 @@
 import {browser, by, element, ExpectedConditions as EC} from 'protractor';
 
 describe('interact with elements', () => {
+
+  // Listing 8.6
   describe('for a new valid user', () => {
     beforeAll(() => {
       browser.get('/');
@@ -22,6 +24,7 @@ describe('interact with elements', () => {
     });
   });
 
+  // Listing 8.7
   describe('for another new valid user', () => {
     beforeAll(() => {
       browser.get('/');
@@ -42,6 +45,7 @@ describe('interact with elements', () => {
     });
   });
 
+  // Listing 8.8
   describe('for an invalid email', () => {
     beforeEach(() => {
       browser.get('/add');
