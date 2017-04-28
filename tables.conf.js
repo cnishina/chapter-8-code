@@ -12,7 +12,7 @@ exports.config = {
   
   framework: 'jasmine',
   specs: [
-    './e2e/test-8-3/*.e2e-spec.ts'
+    './e2e/tables/*.e2e-spec.ts'
   ],
   beforeLaunch: function() {
     require('ts-node').register({
