@@ -19,7 +19,7 @@ describe('by methods', () => {
     let input = element(byId);
     let wdById = WebdriverBy.id('contact-name');
     expect(element(byId).getTagName()).toEqual('input');
-    expect(byId instanceof WebdriverBy).toBeTruthy();
+    // expect(byId instanceof WebdriverBy).toBeTruthy();
     expect(wdById instanceof WebdriverBy).toBeTruthy();
   });
 
@@ -47,7 +47,7 @@ describe('by methods', () => {
     // The following returns a warning. There are several web elements with tag name 'label':
     // expect(element(labelByTagName).getText()).toBe('Name');
     // Instead use element.all and get the first label.
-    expect(element.all(labelByTagName).get(0).getText()).toBe('Name');
+    expect(element.all(labelByTagName).get(0).getText()).toBe('Name *');
   });
 
   it('by.xpath', () => {
