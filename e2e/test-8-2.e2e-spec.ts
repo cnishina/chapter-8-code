@@ -49,14 +49,19 @@ describe('interact with elements', () => {
       element(by.id('contact-name')).sendKeys('Bad Email');
     });
 
-    it('should send an invalid email', () => {
+    fit('should send an invalid email', () => {
       let email = element(by.id('contact-email'));
       email.sendKeys('baduser.com');
       element(by.buttonText('Create')).click();
 
       let invalidEmailModal = element(by.tagName('app-invalid-email-modal'));
+      expect(invalidEmailModal.isPresent()).toBe(true);
+
       let modalButton = invalidEmailModal.element(by.tagName('button'));
       modalButton.click();
+
+      browser.wait(EC.not(EC.presenceOf(invalidEmailModal)), 5000);
+      expect(invalidEmailModal.isPresent()).toBe(false);
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
 
@@ -79,8 +84,12 @@ describe('interact with elements', () => {
       tel.sendKeys('123-456-7890');
       element(by.buttonText('Create')).click();
       let invalidTelModal = element(by.tagName('app-invalid-phone-number-modal'));
+      expect(invalidTelModal.isDisplayed()).toBe(true);
       let modalButton = invalidTelModal.element(by.tagName('button'));
       modalButton.click();
+
+      browser.wait(EC.not(EC.presenceOf(invalidTelModal)), 5000);
+      expect(invalidTelModal.isPresent()).toBe(false);
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
 
@@ -89,8 +98,12 @@ describe('interact with elements', () => {
       tel.sendKeys('12345678901');
       element(by.buttonText('Create')).click();
       let invalidTelModal = element(by.tagName('app-invalid-phone-number-modal'));
+      expect(invalidTelModal.isDisplayed()).toBe(true);
       let modalButton = invalidTelModal.element(by.tagName('button'));
       modalButton.click();
+      
+      browser.wait(EC.not(EC.presenceOf(invalidTelModal)), 5000);
+      expect(invalidTelModal.isPresent()).toBe(false);
       expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'add');
     });
   });
