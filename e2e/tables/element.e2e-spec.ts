@@ -109,10 +109,6 @@ describe('element methods', () => {
       expect(text.match(/craig.services@example.com/).index > 0).toBe(true);
       expect(text.match(/something that does not match/)).toBe(null);
     });
-
-    
-
-
   });
 
   it('sendKeys', () => {
