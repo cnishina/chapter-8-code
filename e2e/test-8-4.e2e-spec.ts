@@ -46,7 +46,7 @@ describe('contact list', () => {
 
     it('should find the contacts and verify each value', () => {
       let contacts = contactList.getContacts();
-      contacts.then(contacts => {
+      contacts.then((contacts: Contact[]) => {
         expect(contacts.length).toBe(5);
         expect(contacts[0]).toBeDefined();
         expect(contacts[1].email).toBe('rusty.component@example.com');

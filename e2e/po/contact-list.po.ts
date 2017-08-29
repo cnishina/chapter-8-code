@@ -49,13 +49,13 @@ export class ContactListPageObject extends PageObject {
   /**
    * Returns a promise of a contact array.
    */
-  getContacts(): wdpromise.Promise<Contact[]> {
+  getContacts() {
     return this.trs.map(elem => {
       let contact: Contact = new Contact();
       let tds = elem.all(by.tagName('td'));
       // We need to get the values of the contact name and email. Since these are in a couple of 
       // different promises, we'll  create a promise array.
-      let promises: wdpromise.Promise<any>[] = [];
+      let promises: any[] = [];
 
       // Getting the text returns a promise of a string then the next function sets the contact's
       // name. This function returns void so the final promise saved is of Promise<void>.
@@ -80,7 +80,7 @@ export class ContactListPageObject extends PageObject {
   /**
    * Returns a promise of comma delimited names
    */
-  getContactNames(): wdpromise.Promise<string> {
+  getContactNames() {
     return this.trs.reduce((acc, curr) => {
       let name = curr.all(by.tagName('td')).get(COL.name);
       return name.getText().then(text => {

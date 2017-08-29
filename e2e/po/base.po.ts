@@ -20,7 +20,7 @@ export class PageObject {
     }
   }
 
-  getCurrentUrl(): wdpromise.Promise<string> {
+  getCurrentUrl() {
     return this.browser.getCurrentUrl();
   }
 }

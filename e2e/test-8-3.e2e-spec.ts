@@ -1,11 +1,13 @@
 import { browser, by, element, ElementFinder } from 'protractor';
 import { promise as wdpromise } from 'selenium-webdriver';
 
-export class Contact {
-  constructor(public name?: string, public email?: string, public tel?: string) {}
+export interface Contact {
+  name?: string;
+  email?: string;
+  tel?: string;
 }
 
-fdescribe('the contact list', () => {
+describe('the contact list', () => {
   beforeAll(() => {
     browser.get('https://contacts-app-starter.firebaseapp.com/');
   });
@@ -24,24 +26,41 @@ fdescribe('the contact list', () => {
     // and are resolved. This is similar to calling element(), nothing happens until you do
     // something like getText().
     expect(craigService.count()).toBeGreaterThan(0);
-    expect(craigService.all(by.tagName('td')).get(2).getText()).toBe('craig.services@example.com');
+    expect(craigService.all(by.tagName('td')).get(2).getText()).toEqual('craig.services@example.com');
   });
 
-  let contactList: wdpromise.Promise<any> = null;
+  let expectedContactList: Contact[] = [{
+    name: 'Adrian Directive',
+    email: 'adrian.directive@example.com',
+    tel: '+1 (703) 555-0123'
+  }, {
+    name: 'Rusty Component',
+    email: 'rusty.component@example.com',
+    tel: '+1 (441) 555-0122'
+  }, {
+    name: 'Jeff Pipe',
+    email: 'jeff.pipe@example.com',
+    tel: '+1 (714) 555-0111'
+  }, {
+    name: 'Craig Service',
+    email: 'craig.services@example.com',
+    tel: '+1 (514) 555-0132'
+  }];
+  
   it('with map: should create a map object', () => {
     let tbody = element(by.tagName('tbody'));
     let trs = tbody.all(by.tagName('tr'));
-    contactList = trs.map(elem => {
-      let contact: Contact = new Contact();
+    let contactList = trs.map(elem => {
+      let contact: Contact = {};
       let tds = elem.all(by.tagName('td'));
       // We need to get the values of the contact name and email. Since these are in a couple of 
       // different promises, we'll  create a promise array.
-      let promises: wdpromise.Promise<any>[] = [];
+      let promises: any[] = [];
 
       // Getting the text returns a promise of a string then the next function sets the contact's
       // name. This function returns void so the final promise saved is of Promise<void>.
       // We set the promise array to be of type any since we do not care about the promise type.
-      promises.push(tds.get(1).getText().then(text => {
+      promises.push(tds.get(1).getText().then(text=> {
         contact.name = text;
       }));
       promises.push(tds.get(2).getText().then(text => {
@@ -57,20 +76,26 @@ fdescribe('the contact list', () => {
       });
     })
     
+    // Check the results
     expect(contactList).toBeDefined();
-    contactList.then(contacts => {
-      expect(contacts.length).toBe(4);
+    contactList.then((contacts: Contact[]) => {
+
+      // Spot check the results
+      expect(contacts.length).toEqual(4);
       expect(contacts[0]).toBeDefined();
-      expect(contacts[1].email).toBe('rusty.component@example.com');
-      expect(contacts[2].tel).toBe('+1 (714) 555-0111');
-      expect(contacts[3].name).toBe('Craig Service');
+      expect(contacts[1].email).toEqual('rusty.component@example.com');
+      expect(contacts[2].tel).toEqual('+1 (714) 555-0111');
+      expect(contacts[3].name).toEqual('Craig Service');
+
+      // Check all the contacts match
+      expect(contacts).toEqual(expectedContactList);
     });
   });
 
   it('with reduce: get a list of contact names', () => {
     let tbody = element(by.tagName('tbody'));
     let trs = tbody.all(by.tagName('tr'));
-    let contacts: wdpromise.Promise<string> = trs.reduce((acc, curr) => {
+    let contacts = trs.reduce((acc, curr) => {
       let name = curr.all(by.tagName('td')).get(1);
       return name.getText().then(text => {
         return acc === '' ? text : acc + ', ' + text;
