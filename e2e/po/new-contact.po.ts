@@ -42,11 +42,11 @@ export class NewContactPageObject extends PageObject {
     return this.inputName.getAttribute('value');
   }
 
-  getEmail(): wdpromise.Promise<string> {
+  getEmail() {
     return this.inputEmail.getAttribute('value');
   }
 
-  getPhone(): wdpromise.Promise<string> {
+  getPhone() {
     return this.inputPhone.getAttribute('value');
   }
 }
