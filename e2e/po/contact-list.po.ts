@@ -1,7 +1,8 @@
-import { by, ProtractorBrowser, ElementArrayFinder } from 'protractor';
-import { promise as wdpromise } from 'selenium-webdriver';
-import { PageObject } from './base.po';
-import { NewContactPageObject } from './new-contact.po';
+import {by, ElementArrayFinder, ProtractorBrowser} from 'protractor';
+import {promise as wdpromise} from 'selenium-webdriver';
+
+import {PageObject} from './base.po';
+import {NewContactPageObject} from './new-contact.po';
 
 export enum COL {
   name = 1,
@@ -10,7 +11,8 @@ export enum COL {
 }
 
 export class Contact {
-  constructor(public name?: string, public email?: string, public tel?: string) {}
+  constructor(
+      public name?: string, public email?: string, public tel?: string) {}
 }
 
 export class ContactListPageObject extends PageObject {
@@ -34,8 +36,8 @@ export class ContactListPageObject extends PageObject {
   }
 
   /**
-   * Returns the ElementArrayFinder object for the table row. This is an array because there could
-   * be more than one entry with the same matching name
+   * Returns the ElementArrayFinder object for the table row. This is an array
+   * because there could be more than one entry with the same matching name
    * @param name
    */
   findContact(name: string): ElementArrayFinder {
@@ -53,13 +55,14 @@ export class ContactListPageObject extends PageObject {
     return this.trs.map(elem => {
       let contact: Contact = new Contact();
       let tds = elem.all(by.tagName('td'));
-      // We need to get the values of the contact name and email. Since these are in a couple of 
-      // different promises, we'll  create a promise array.
+      // We need to get the values of the contact name and email. Since these
+      // are in a couple of different promises, we'll  create a promise array.
       let promises: any[] = [];
 
-      // Getting the text returns a promise of a string then the next function sets the contact's
-      // name. This function returns void so the final promise saved is of Promise<void>.
-      // We set the promise array to be of type any since we do not care about the promise type.
+      // Getting the text returns a promise of a string then the next function
+      // sets the contact's name. This function returns void so the final
+      // promise saved is of Promise<void>. We set the promise array to be of
+      // type any since we do not care about the promise type.
       promises.push(tds.get(COL.name).getText().then(text => {
         contact.name = text;
       }));

@@ -1,7 +1,5 @@
-import { browser as globalBrowser, element as globalElement, ElementHelper,
-  ExpectedConditions as globalExpectedConditions, ProtractorBrowser,
-  ProtractorExpectedConditions } from 'protractor';
-import { promise as wdpromise } from 'selenium-webdriver';
+import {browser as globalBrowser, element as globalElement, ElementHelper, ExpectedConditions as globalExpectedConditions, ProtractorBrowser, ProtractorExpectedConditions} from 'protractor';
+import {promise as wdpromise} from 'selenium-webdriver';
 
 export class PageObject {
   browser: ProtractorBrowser;
