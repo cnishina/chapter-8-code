@@ -1,7 +1,7 @@
-import { by, ElementFinder, ProtractorBrowser } from 'protractor';
-import { promise as wdpromise } from 'selenium-webdriver';
-import { PageObject } from './base.po';
-import { ContactListPageObject } from './contact-list.po';
+import {by, ElementFinder, ProtractorBrowser} from 'protractor';
+import {promise as wdpromise} from 'selenium-webdriver';
+import {PageObject} from './base.po';
+import {ContactListPageObject} from './contact-list.po';
 
 export class NewContactPageObject extends PageObject {
   inputName: ElementFinder;
@@ -16,12 +16,12 @@ export class NewContactPageObject extends PageObject {
   }
 
   /**
-   * Set extra fields for email and phone number. We should return a promise and since we are doing
-   * multiple actions, we should keep track of them in a promises array and return all promises
-   * as a single promise.
-   * 
-   * @param email 
-   * @param phoneNumber 
+   * Set extra fields for email and phone number. We should return a promise and
+   * since we are doing multiple actions, we should keep track of them in a
+   * promises array and return all promises as a single promise.
+   *
+   * @param email
+   * @param phoneNumber
    */
   setContactInfo(name: string, email: string, phoneNumber: string) {
     this.inputName.sendKeys(name);

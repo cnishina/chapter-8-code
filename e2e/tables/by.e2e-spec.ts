@@ -1,5 +1,5 @@
-import { browser, by, By, element, ProtractorBy } from 'protractor';
-import { By as WebdriverBy } from 'selenium-webdriver';
+import {browser, by, By, element, ProtractorBy} from 'protractor';
+import {By as WebdriverBy} from 'selenium-webdriver';
 
 describe('by methods', () => {
   beforeEach(() => {
@@ -44,8 +44,8 @@ describe('by methods', () => {
     let h4ByTagName = by.tagName('h4');
     let labelByTagName = by.tagName('label');
     expect(element(h4ByTagName).getText()).toBe('Add New Contact');
-    // The following returns a warning. There are several web elements with tag name 'label':
-    // expect(element(labelByTagName).getText()).toBe('Name');
+    // The following returns a warning. There are several web elements with tag
+    // name 'label': expect(element(labelByTagName).getText()).toBe('Name');
     // Instead use element.all and get the first label.
     expect(element.all(labelByTagName).get(0).getText()).toBe('Name *');
   });
@@ -54,17 +54,21 @@ describe('by methods', () => {
     let byXpath1 = by.xpath('//md-card/div/h4');
     expect(element(byXpath1).getText()).toBe('Add New Contact');
 
-    // Let's try this again. They are nested but let's say we forgot to put in the div tags.
-    // The actual xpath for this is //app-new-contact/div/md-card/div/h4
-    // It is important to note that finding an element based on xpath should be avoided if possible
-    // because it can cause brittle tests.
+    // Let's try this again. They are nested but let's say we forgot to put in
+    // the div tags. The actual xpath for this is
+    // //app-new-contact/div/md-card/div/h4 It is important to note that finding
+    // an element based on xpath should be avoided if possible because it can
+    // cause brittle tests.
     let byXpath2 = by.xpath('//app-new-contact/md-card/h4');
     let text: string = null;
-    element(byXpath2).getText().then(() => {
-      console.log('this should not work');
-    }).catch(err => {
-      expect(err.toString()).toContain('No element found using locator');
-    });
+    element(byXpath2)
+        .getText()
+        .then(() => {
+          console.log('this should not work');
+        })
+        .catch(err => {
+          expect(err.toString()).toContain('No element found using locator');
+        });
   });
 
   it('Protractor by or By is different than a Webdriver By', () => {
@@ -83,10 +87,10 @@ describe('by methods', () => {
     let byButtonText = by.buttonText('Create');
     expect(byButtonText instanceof WebdriverBy).not.toBeTruthy();
 
-    // Turns out byButtonText is an object with type ProtractorLocator. We can cast the object to
-    // the interface of ProtractorLocator which has types column, findElementsOverride, and row.
-    // Remember since it is an interface, we cannot test to see if it is an instanceof
-    // ProtractorLocator.
+    // Turns out byButtonText is an object with type ProtractorLocator. We can
+    // cast the object to the interface of ProtractorLocator which has types
+    // column, findElementsOverride, and row. Remember since it is an interface,
+    // we cannot test to see if it is an instanceof ProtractorLocator.
     //
     // import { ProtractorLocator } from 'protractor/built/locators';
     //

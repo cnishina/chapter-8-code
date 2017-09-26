@@ -1,14 +1,15 @@
-import { browser, by } from 'protractor';
-import { ContactListPageObject, NewContactPageObject, COL, Contact } from './po';
+import {browser, by} from 'protractor';
+
+import {COL, Contact, ContactListPageObject, NewContactPageObject} from './po';
 
 describe('contact list', () => {
   let contactList: ContactListPageObject;
   let newContact: NewContactPageObject;
 
   beforeAll(() => {
-    // We could also add the browser object here. For example: new ContactListPO(browser).
-    // This could become important if we fork the browser since the browser object refers to the
-    // current selenium session.
+    // We could also add the browser object here. For example: new
+    // ContactListPO(browser). This could become important if we fork the
+    // browser since the browser object refers to the current selenium session.
     contactList = new ContactListPageObject();
   });
 
@@ -16,10 +17,10 @@ describe('contact list', () => {
     beforeAll(() => {
       contactList.navigateTo();
     });
-    
+
     it('should click the + button', () => {
       newContact = contactList.clickPlusButton();
-      expect(newContact.getCurrentUrl()).toBe(browser.baseUrl + 'add');
+      expect(newContact.getCurrentUrl()).toBe(browser.baseUrl + '/add');
     });
 
     it('should fill out form for a new contact', () => {
@@ -31,7 +32,7 @@ describe('contact list', () => {
 
     it('should click the create button', () => {
       contactList = newContact.clickCreateButton();
-      expect(contactList.getCurrentUrl()).toBe(browser.baseUrl);
+      expect(contactList.getCurrentUrl()).toBe(browser.baseUrl + '/');
     });
   });
 
@@ -58,7 +59,8 @@ describe('contact list', () => {
 
     it('should get the contact names so we can print them to console', () => {
       let contactNames = contactList.getContactNames();
-      let expectedNames = 'Adrian Directive, Rusty Component, Jeff Pipe, Craig Service, Mr. Newton';
+      let expectedNames =
+          'Adrian Directive, Rusty Component, Jeff Pipe, Craig Service, Mr. Newton';
       expect(contactNames).toBe(expectedNames);
       contactNames.then(text => {
         console.log(text);

@@ -8,11 +8,11 @@ exports.config = {
     }
   },
   directConnect: true,
-  baseUrl: 'https://contacts-app-starter.firebaseapp.com/',
+  baseUrl: 'https://contacts-app-starter.firebaseapp.com',
   
   framework: 'jasmine',
   specs: [
-    './e2e/test-8-4.e2e-spec.ts'
+    './e2e/first-test.e2e-spec.ts'
   ],
   beforeLaunch: function() {
     require('ts-node').register({

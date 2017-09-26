@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/workspace
     docker:
-      - image: alexeagle/ngcontainer  
+      - image: circleci/node:7-browsers  
     steps:
       - checkout
       
@@ -14,10 +14,15 @@ jobs:
       - run: yarn --version
 
       - run: npm install
+      - run: npm run format-enforce
       
-      # TESTS!
-      - run: xvfb-run -a npm run e2e test-8-1.conf.js
-      - run: xvfb-run -a npm run e2e test-8-2.conf.js
-      - run: xvfb-run -a npm run e2e test-8-3.conf.js
-      - run: xvfb-run -a npm run e2e test-8-4.conf.js
-      - run: xvfb-run -a npm run e2e tables.conf.js
+      # Individual tests
+      - run: xvfb-run -a npm run e2e protractor-first-test.conf.js
+      - run: xvfb-run -a npm run e2e protractor-add-contact.conf.js
+      - run: xvfb-run -a npm run e2e protractor-invalid-contact.conf.js
+      - run: xvfb-run -a npm run e2e protractor-contact-list.conf.js
+      - run: xvfb-run -a npm run e2e protractor-page-objects.conf.js
+      - run: xvfb-run -a npm run e2e protractor-tables.conf.js
+
+      # Run all tests
+      - run: xvfb-run -a npm run e2e protractor.conf.js
