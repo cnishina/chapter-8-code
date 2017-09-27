@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-
 const tsGlobs = ['e2e/**/*.ts'];
 
 gulp.task('format:enforce', () => {
@@ -14,4 +13,10 @@ gulp.task('format', () => {
   const clangFormat = require('clang-format');
   return gulp.src(tsGlobs, { base: '.' }).pipe(
     format.format('file', clangFormat)).pipe(gulp.dest('.'));
+});
+
+gulp.task('tslint', () => {
+  let tslint = require('gulp-tslint');
+  return gulp.src("./e2e/po/new-contact.po.ts")
+    .pipe(tslint()).pipe(tslint.report());
 });
