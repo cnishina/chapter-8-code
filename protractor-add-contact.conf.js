@@ -14,7 +14,7 @@ exports.config = {
   specs: [
     './e2e/add-*contact.e2e-spec.ts'
   ],
-  beforeLaunch: function() {
+  onPrepare: () => {
     require('ts-node').register({
       project: 'e2e'
     });

@@ -14,7 +14,7 @@ exports.config = {
   specs: [
     './e2e/first-test.e2e-spec.ts'
   ],
-  beforeLaunch: function() {
+  onPrepare: () => {
     require('ts-node').register({
       project: 'e2e'
     });
